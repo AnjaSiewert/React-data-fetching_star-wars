@@ -3,8 +3,6 @@ import Layout from "../../components/Layout";
 import useSWR from "swr";
 import { useRouter } from "next/router";
 
-const URL = "https://swapi.dev/api/people/";
-
 export default function Character() {
   const router = useRouter();
   const { id } = router.query;
@@ -19,9 +17,12 @@ export default function Character() {
     }
     return res.json();
   };
-  const { data, isLoading } = useSWR(URL + id, fetcher);
+  const { data, isLoading, error } = useSWR(
+    `https://swapi.dev/api/people/${id}`,
+    fetcher
+  );
   if (isLoading) return <p>loading...</p>;
-  console.log(data);
+  if (error) return <p>falied to load</p>;
 
   return (
     <Layout>
