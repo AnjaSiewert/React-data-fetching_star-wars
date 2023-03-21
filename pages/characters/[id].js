@@ -22,7 +22,6 @@ export default function Character() {
     fetcher
   );
   if (isLoading) return <p>loading...</p>;
-  if (error) return <p>falied to load</p>;
 
   return (
     <Layout>
